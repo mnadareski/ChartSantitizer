@@ -307,6 +307,13 @@ namespace ChartSanitizer
             if (songIni.Count == 0) songIni.Count = null;
             if (songIni.Rating == 0) songIni.Rating = null;
 
+            if (!string.IsNullOrWhiteSpace(setter.UnlockId))
+                songIni.UnlockId = setter.UnlockId;
+            if (!string.IsNullOrWhiteSpace(setter.UnlockRequire))
+                songIni.UnlockText = setter.UnlockRequire;
+            if (!string.IsNullOrWhiteSpace(setter.UnlockText))
+                songIni.UnlockText = setter.UnlockText;
+
             #endregion
         }
 

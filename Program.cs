@@ -18,6 +18,8 @@ namespace ChartSanitizer
             bool options = true;
             foreach (string arg in args)
             {
+                #region Clone Hero
+
                 if (options && arg == "-pfa")
                 {
                     setter.PlaylistFromAlbum = true;
@@ -33,6 +35,29 @@ namespace ChartSanitizer
                     setter.SubPlaylist = arg.Split('=')[1];
                     continue;
                 }
+
+                #endregion
+
+                #region FoFiX
+
+                else if (options && arg.StartsWith("-uid="))
+                {
+                    setter.UnlockId = arg.Split('=')[1];
+                    continue;
+                }
+                else if (options && arg.StartsWith("-ur="))
+                {
+                    setter.UnlockRequire = arg.Split('=')[1];
+                    continue;
+                }
+                else if (options && arg.StartsWith("-ut="))
+                {
+                    setter.UnlockText = arg.Split('=')[1];
+                    continue;
+                }
+
+                #endregion
+
                 else
                 {
                     options = false;
@@ -64,9 +89,12 @@ namespace ChartSanitizer
             Console.WriteLine("Usage: ChartSanitizer.exe [options] <path> ...");
             Console.WriteLine();
             Console.WriteLine("Options:");
-            Console.WriteLine("  -pfa       Set playlist values from album info");
-            Console.WriteLine("  -pl=<pl>   Set playlist name");
-            Console.WriteLine("  -spl=<spl> Set sub-playlist name");
+            Console.WriteLine("  -pfa       Set playlist values from album info (CH)");
+            Console.WriteLine("  -pl=<pl>   Set playlist name (CH)");
+            Console.WriteLine("  -spl=<spl> Set sub-playlist name (CH)");
+            Console.WriteLine("  -uid=<uid> Set unlock ID (FoFiX)");
+            Console.WriteLine("  -ur=<ur>   Set unlock requirement (FoFiX)");
+            Console.WriteLine("  -ut=<ut>   Set unlock text (FoFiX)");
         }
 
         /// <summary>

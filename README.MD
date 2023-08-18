@@ -17,6 +17,9 @@ Options:
     -pfa       Set playlist values from album info
     -pl=<pl>   Set playlist name
     -spl=<spl> Set sub-playlist name
+    -uid=<uid> Set unlock ID (FoFiX)
+    -ur=<ur>   Set unlock requirement (FoFiX)
+    -ut=<ut>   Set unlock text (FoFiX)
 ```
 
 ## External Libraries
