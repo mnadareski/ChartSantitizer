@@ -284,6 +284,7 @@ namespace ChartSanitizer
             #region Chart Properties
 
             if (songIni.VocalGender != "male" && songIni.VocalGender != "female") songIni.VocalGender = null;
+            if (songIni.Delay == 0) songIni.Delay = null;
             if (songIni.MultiplierNote != 103 && songIni.MultiplierNote != 116) songIni.MultiplierNote = null;
 
             #endregion
@@ -296,7 +297,15 @@ namespace ChartSanitizer
         
             #region Images and Other Resources
 
+            if (songIni.VideoStartTime == 0) songIni.VideoStartTime = null;
             if (songIni.VideoEndTime < 0) songIni.VideoEndTime = null;
+
+            #endregion
+
+            #region Miscellaneous (Game-Specific)
+
+            if (songIni.Count == 0) songIni.Count = null;
+            if (songIni.Rating == 0) songIni.Rating = null;
 
             #endregion
         }
