@@ -292,6 +292,11 @@ namespace ChartSanitizer
             #region Chart Properties (Game-Specific)
 
             if (songIni.EarlyHitWindowSize != "none" && songIni.EarlyHitWindowSize != "half" && songIni.EarlyHitWindowSize != "full") songIni.EarlyHitWindowSize = null;
+            if (songIni.GuitarType < 1) songIni.GuitarType = null;
+            if (songIni.BassType < 1) songIni.BassType = null;
+            if (songIni.KitType < 1) songIni.KitType = null;
+            if (songIni.KeysType < 1) songIni.KeysType = null;
+            if (songIni.DanceType < 1) songIni.DanceType = null;
 
             #endregion
         
