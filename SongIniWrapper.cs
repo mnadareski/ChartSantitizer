@@ -284,6 +284,10 @@ namespace ChartSanitizer
             #region Chart Properties
 
             if (songIni.VocalGender != "male" && songIni.VocalGender != "female") songIni.VocalGender = null;
+            if (songIni.RealGuitarTuning.StartsWith("0 0 0 0 0 0")) songIni.RealGuitarTuning = null;
+            if (songIni.RealGuitar22Tuning.StartsWith("0 0 0 0 0 0")) songIni.RealGuitar22Tuning = null;
+            if (songIni.RealBassTuning.StartsWith("0 0 0 0 0 0")) songIni.RealBassTuning = null;
+            if (songIni.RealBass22Tuning.StartsWith("0 0 0 0 0 0")) songIni.RealBass22Tuning = null;
             if (songIni.Delay == 0) songIni.Delay = null;
             if (songIni.MultiplierNote != 103 && songIni.MultiplierNote != 116) songIni.MultiplierNote = null;
 
@@ -299,7 +303,7 @@ namespace ChartSanitizer
             if (songIni.DanceType < 1) songIni.DanceType = null;
 
             #endregion
-        
+
             #region Images and Other Resources
 
             if (songIni.VideoStartTime == 0) songIni.VideoStartTime = null;
