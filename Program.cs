@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ChartSanitizer
 {
@@ -63,12 +64,8 @@ namespace ChartSanitizer
                     options = false;
                 }
 
-                Console.WriteLine($"Sanitizing '{arg}'...");
-                bool result = Sanitize(arg, setter);
-                if (result)
-                    Console.WriteLine("Sanitizing succeeded!");
-                else
-                    Console.WriteLine("Sanitizing failed!");
+                // Process the argument as a path
+                ProcessPath(arg, setter);
             }
         }
 
@@ -95,6 +92,58 @@ namespace ChartSanitizer
             Console.WriteLine("  -uid=<uid> Set unlock ID (FoFiX)");
             Console.WriteLine("  -ur=<ur>   Set unlock requirement (FoFiX)");
             Console.WriteLine("  -ut=<ut>   Set unlock text (FoFiX)");
+        }
+
+        /// <summary>
+        /// Process a single file or directory path
+        /// </summary>
+        /// <param name="path">Path to process</param>
+        /// <param name="setter">Setter containing santization information</param>
+        private static void ProcessPath(string? path, Setter setter)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+                return;
+
+            if (File.Exists(path))
+            {
+                ProcessFile(path, setter);
+            }
+            else if (Directory.Exists(path))
+            {
+                foreach (string file in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
+                {
+                    ProcessFile(file, setter);
+                }
+            }
+            else
+            {
+                Console.WriteLine($"'{path}' is not a valid file or directory, skipping...");
+            }
+        }
+
+        /// <summary>
+        /// Process a single file
+        /// </summary>
+        /// <param name="file">File path to process</param>
+        /// <param name="setter">Setter containing santization information</param>
+        private static void ProcessFile(string? file, Setter setter)
+        {
+            if (string.IsNullOrWhiteSpace(file))
+                return;
+
+            // If the filename isn't `song.ini`
+            if (Path.GetFileName(file).ToLowerInvariant() != "song.ini")
+            {
+                Console.WriteLine($"'{file}' is not named `song.ini`, skipping...");
+                return;
+            }
+
+            Console.WriteLine($"Sanitizing '{file}'...");
+            bool result = Sanitize(file, setter);
+            if (result)
+                Console.WriteLine("Sanitizing succeeded!");
+            else
+                Console.WriteLine("Sanitizing failed!");
         }
 
         /// <summary>
